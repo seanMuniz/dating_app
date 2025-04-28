@@ -4,7 +4,7 @@ import AntDesign from '@expo/vector-icons/AntDesign';
 import { useState } from "react";
 import { db, auth } from "../firebaseConfig";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { collection, addDoc } from "firebase/firestore";
+import { doc, setDoc} from "firebase/firestore";
 
 const CreateAccount = () => {
     const [emailFromUI, setEmailFromUI] = useState("");
@@ -39,11 +39,10 @@ const CreateAccount = () => {
                 console.log("user id: " + userCredential.user.uid);
                 
                 const newUser = {
-                    uid: userCredential.user.uid,
                     Email: userCredential.user.email,
                 }
 
-                await addDoc(collection(db, "Users"), newUser);
+                await setDoc(doc(db, "Users", userCredential.user.uid), newUser);
                 
     
     
