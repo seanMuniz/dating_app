@@ -1,6 +1,5 @@
 import { StyleSheet, 
         Text,
-        Pressable,
         View,
         TextInput,
         TouchableOpacity } from "react-native";

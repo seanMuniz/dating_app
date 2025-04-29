@@ -5,8 +5,9 @@ import { useState } from "react";
 import { db, auth } from "../firebaseConfig";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { doc, setDoc} from "firebase/firestore";
+import NextBtn from "../Components/NextBtn";
 
-const CreateAccount = () => {
+const CreateAccount = ({navigation}) => {
     const [emailFromUI, setEmailFromUI] = useState("");
     const [passwordFromUI, setPasswordFromUI] = useState("");
     
@@ -44,7 +45,7 @@ const CreateAccount = () => {
 
                 await setDoc(doc(db, "Users", userCredential.user.uid), newUser);
                 
-    
+                navigation.navigate("Get Name", {db_id: userCredential.user.uid});
     
             } catch (error){
                 console.log("Error when creating the user");
@@ -97,10 +98,7 @@ const CreateAccount = () => {
                     </View> 
             }
 
-            <TouchableOpacity style={styles.nextBtn} onPress={createAccount}>
-                <Text style={{color: 'white'}}>Continue</Text>
-                <MaterialIcons name="navigate-next" size={24} color="white" />
-            </TouchableOpacity>
+            <NextBtn onPress={createAccount}/>
         </View>
     )
 }
@@ -121,17 +119,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 15,
         borderColor: "#bbbbbb",
     },
-    nextBtn: {
-        flexDirection: "row", 
-        alignItems: 'center',
-        justifyContent: 'center',
-        width: "100%",
-        paddingVertical: 12,
-        borderRadius: 20,
-        marginTop: 20,
-        backgroundColor: "#cbb2ff",
-        marginBottom: 10,
-    }
+
 })
 
 export default CreateAccount

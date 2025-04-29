@@ -7,6 +7,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import Login from './Screens/Login';
 import CreateAccount from './Screens/CreateAccount'
+import GetName from './Screens/GetName';
 const Stack = createStackNavigator();
 
 
@@ -31,6 +32,16 @@ export default function App() {
               headerBackVisible: false,
               gestureEnabled: true,
             }}>
+          </Stack.Screen>
+          <Stack.Screen
+            name="Get Name"
+            component={GetName}
+            options={{
+              headerShown: false,
+              headerBackgroundVisible: false,
+              gestureEnabled: true
+            }}
+            >
           </Stack.Screen>
       </Stack.Navigator>
     </NavigationContainer>
